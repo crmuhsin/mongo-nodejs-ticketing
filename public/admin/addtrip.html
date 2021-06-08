@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+  <div class="template">
+    <header class="headeroption clear" id="headTemplate">
+
+    </header>
+    <section class="contentsection clear">
+      <aside class="leftsidebar clear" id="leftSide">
+      </aside>
+      <article class="maincontent clear">
+        <div class="content clear">
+          <div class="addarticle clear">
+            <h2 id="pageTitle">Add Trip</h2>
+            <form action="" method="" enctype="multipart/form-data">
+              <table>
+                <tr>
+                  <td>From Station</td>
+                  <td>
+                    <select name="from_station_id" id="fromStation">
+
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>To Station</td>
+                  <td><select name="to_station_id" id="toStation"></select></td>
+                </tr>
+                <tr>
+                  <td>Coach No</td>
+                  <td><input type="text" id="coach_no" name="coach_no" placeholder="Please Enter a Coach Number"></td>
+                </tr>
+
+                <tr>
+                  <td>Coach Type</td>
+                  <td>
+                    <select name="coach_type" id="coach_type">
+                      <option value="AC">AC</option>
+                      <option value="Non AC">Non AC</option>
+
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Deperture Time</td>
+                  <td><input type="time" id="deperture_time" name="deperture_time"
+                      placeholder="Please Enter Deperture Time"></td>
+
+                </tr>
+                <tr>
+                  <td>Fare</td>
+                  <td><input type="number" id="fare" name="fare" placeholder="Please Enter Fare"></td>
+
+                </tr>
+                <tr>
+                  <td></td>
+                  <td id="buttonTitle"><button type="button" id="buttonTitle"
+                      onclick="addTrip(from_station_id, to_station_id, coach_no,coach_type, deperture_time,fare)">Add
+                      Trip</button></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+      </article>
+    </section>
+    <footer class="footersection clear">
+      <h3>&copy; Copyright Exclusive Travels 2021.</h3>
+    </footer>
+  </div>
+  <script src="js/trip.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    dynamicStation();
+    let query = window.location.search.substring(1);
+    let tripId = query.split('=')[1];
+    if (tripId) {
+
+      getTrip(tripId);
+
+      let editTitle = document.getElementById("pageTitle");
+      editTitle.innerText = 'Edit Trip';
+
+      let editButton = document.getElementById("buttonTitle");
+      editButton.innerHTML = `<button type="button" id="buttonTitle" onclick="editItem(from_station_id, to_station_id,deperture_time,fare,'${tripId}')">Edit Trip</button>`;
+
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+  <div class="template">
+    <header class="headeroption clear" id="headTemplate">
+
+    </header>
+    <section class="contentsection clear">
+      <aside class="leftsidebar clear" id="leftSide">
+      </aside>
+      <article class="maincontent clear">
+        <div class="content clear">
+          <div class="addarticle clear">
+            <h2 id="pageTitle">Add Bus</h2>
+            <form action="" method="" enctype="multipart/form-data">
+              <table>
+                <tr>
+                  <td>Coach No</td>
+                  <td><input type="text" id="coach_no" name="coach_no" placeholder="Please Enter a Coach Number"></td>
+                </tr>
+
+                <tr>
+                  <td>Coach Type</td>
+                  <td>
+                    <select name="coach_type" id="coach_type">
+                      <option value="AC">AC</option>
+                      <option value="Non AC">Non AC</option>
+
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td id="buttonTitle"><button type="button" id="buttonTitle"
+                      onclick="addItem(coach_no, coach_type)">Add Bus</button>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+      </article>
+    </section>
+    <footer class="footersection clear">
+      <h3>&copy; Copyright Exclusive Travels 2021.</h3>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/bus.js" type="text/javascript"></script>
+  <script>
+    let query = window.location.search.substring(1);
+    let busId = query.split('=')[1];
+    if (busId) {
+
+      getBus(busId);
+
+      let editTitle = document.getElementById("pageTitle");
+      editTitle.innerText = 'Edit Bus';
+
+      let editButton = document.getElementById("buttonTitle");
+      editButton.innerHTML = `<button type="button" id="buttonTitle" onclick="editItem(coach_no, coach_type, '${busId}')">Edit Bus</button>`;
+
+    }
+  </script>
+
+
+
+</body>
+
+</html>

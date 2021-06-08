@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Travels</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body>
+    <header class="head">
+        <nav class="navbar">
+            <div class="logo-text">
+                <h1>Exclusive Travels</h1>
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item "><a href="" class="nav-link first-link">HOME</a></li>
+                <li class="nav-item"><a href="" class="nav-link">LOCATION</a></li>
+                <li class="nav-item"><a href="" class="nav-link">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="form-section">
+        <div class="form-head">
+            <div class="form-title">
+                <span class="icon">
+                    <ion-icon name="ticket-outline"></ion-icon>
+                </span>
+                <h3 class="form-heading">Buy Ticket</h3>
+            </div>
+            <form action="#" class="form">
+                <select class="select" name="fromStation" required id="showFromStation">
+                    <option value="">From</option>
+                </select>
+                <select class="select" name="toStation" required id="showToStation">
+                    <option value="">To</option>
+                </select> <br>
+                <input type="date" class="date-input">
+
+                <select class="select">
+                    <option>Coach Type</option>
+                    <option value="">AC</option>
+                    <option value="">Non AC</option>
+                </select>
+                <button type="button" onclick="searchTrips(fromStation,toStation)" class="search-btn">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </form>
+        </div>
+    </section>
+    <section class="search-result">
+        <div class="view-trips" id="viewTrips">
+            <div class="trips">
+                <h2 class="trips-number">Available Trips: </h2>
+            </div>
+        </div>
+    </section> <br>
+    <section class="view-seatplan" id="showseat">
+
+    </section>
+
+
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="js/seatplan.js"></script>
+    <script src="js/search.js"></script>
+
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <!-- <script src="admin/js/trip.js"></script> -->
+
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <!-- <script src="../public/admin/js/station.js"></script> -->
+
+    <script>
+        dynamicStation();
+    </script>
+
+</body>
+
+</html>

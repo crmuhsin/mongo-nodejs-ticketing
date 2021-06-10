@@ -70,7 +70,7 @@ function viewSeat(index) {
               <div class="upper-table">Selected Seats: <span id="totalSeat-${index}">0</span> (Max 5)</div>
               <div class="upper-table">Total Fare: <span id="totalFare-${index}">0</span></div>
             </div>
-            <button type="button" onclick="continueToCart('${index}')" class="continue-btn hidden" id="continueBtn">Continue</button>
+            <button type="button" onclick="continueToCart('${index}')" class="continue-btn hidden" id="continueBtn-${index}">Continue</button>
           </div>
       </div>`;
   }
@@ -95,11 +95,13 @@ function fillSeatData(index) {
     })
     .then((response) => {
       if (response.length) {
-        let fillSeats = response[0].seat_list;
-        fillSeats.forEach((seatName) => {
-          let seatElement = document.getElementById(`Seat-${index}-${seatName}`);
-          selectSeatTable(seatName, index, seatElement );
-        });
+        response.forEach((booking) => {
+          let fillSeats = booking.seat_list;
+          fillSeats.forEach((seatName) => {
+            let seatElement = document.getElementById(`Seat-${index}-${seatName}`);
+            seatElement.classList.add("booked");
+          });
+        })
       }
     });
 }
@@ -111,7 +113,8 @@ function selectSeat(event) {
 }
 
 function selectSeatTable (seatName, tripIndex, element) {
-  let contBtn = document.getElementById("continueBtn");
+  let contBtn = document.getElementById(`continueBtn-${tripIndex}`);
+  if (element.className.includes("booked")) return;
   if (element.className.includes("selected")) {
     element.classList.remove("selected");
 
@@ -174,6 +177,6 @@ function continueToCart(tripIndex) {
     },
     body: JSON.stringify(booking),
   }).then((response) => {
-    location.replace(response.url);
+    // location.replace(response.url);
   });
 }

@@ -217,6 +217,9 @@ body {
 .selected {
   background: green;
 }
+.booked {
+  background: grey;
+}
 
 .bus-info {
   width: 117rem;

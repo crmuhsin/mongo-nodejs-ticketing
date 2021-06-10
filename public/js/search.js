@@ -29,7 +29,7 @@ function viewTrip(searchItems) {
                 <div class="part">
                   <span>Departure Time</span>
                   <span>${response[i].deperture_time}</span>
-                  <span>${date}</span>
+                  <span>${searchDate}</span>
                 </div>
                 <div class="part"> 
                   <span>${response[i].coach_type}</span> 
@@ -43,6 +43,14 @@ function viewTrip(searchItems) {
                 </div>
             </div>
           </div>`;
+      }
+      if (response.length === 0) {
+        viewTrip.innerHTML += `
+        <div id="viewSeats">
+          <div class="view-card">
+              No Available Trips to Show.
+          </div>
+        </div>`;
       }
     });
 }
@@ -70,11 +78,12 @@ function getStation(stationId) {
 }
 function searchTrips(fromStation, toStation, journeyDate, coachType) {
   // e.preventDefault();
+  searchDate = journeyDate.value;
   let searchItems = {
     fromStationId: fromStation.value,
     toStationId: toStation.value,
     coachType: coachType.value,
+    searchDate
   };
-  searchDate = journeyDate.value;
   viewTrip(searchItems);
 }

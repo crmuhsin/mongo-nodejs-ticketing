@@ -37,25 +37,25 @@ module.exports = function (zapp, mongoose) {
   // //delete
   // zapp.delete("/trip/:item", function (req, res) {
   //   // delete requested item from mongodb
-  //   Trip.find({ _id: req.params.item }).remove(function (err, data) {
+  //   Booking.find({ _id: req.params.item }).remove(function (err, data) {
   //     if (err) throw err;
   //     res.json(data);
   //   });
   // });
-  // //find
-  // zapp.get("/trip/:item", function (req, res) {
-  //   //get data from mongodb and pass it to view
-  //   Trip.find({ _id: req.params.item }, function (err, data) {
-  //     if (err) throw err;
-  //     console.log(data);
-  //     res.send(data);
-  //   });
-  // });
+
+  //find
+  zapp.get("/all-booking", function (req, res) {
+    //get data from mongodb and pass it to view
+    Booking.find({}, function (err, data) {
+      if (err) throw err;
+      res.send(data);
+    });
+  });
   // //update
   // zapp.post("/trip/:item", function (req, res) {
   //   // get data from the view and add it to mongodb
   //   console.log(req.body);
-  //   Trip.update(
+  //   Booking.update(
   //     { _id: req.params.item },
   //     req.body,
   //     { multi: false },

@@ -40,6 +40,13 @@ module.exports = function (zapp, mongoose) {
     }
     Trip.find(searchQuery, function (err, data) {
         if (err) throw err;
+        console.log(data);
+        data = data.filter((el) => {
+          let now = new Date();
+          let date = new Date(req.body.searchDate +' '+ el.deperture_time);
+          return now < date;
+        })
+        console.log(data);
         res.send(data);
       }
     );

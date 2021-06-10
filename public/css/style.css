@@ -1,159 +1,32 @@
-/* index.html  style start here */
-/*============CSS RESET=====*/
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
 body {
-  line-height: 1;
+  display: flex;
+  justify-content: center;
 }
-ol,
-ul {
-  list-style: none;
+#main {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
 }
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-html {
-  font-size: 62.5%;
-}
-/*============HEADER-START=====*/
 .head {
   background-color: #ffffff;
-  height: 10vh;
+  height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .head .navbar {
-  width: 117rem;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .navbar .logo-text {
-  font-size: 2.9rem;
+  font-size: 20px;
   font-weight: 900;
-  letter-spacing: 0.3rem;
+  letter-spacing: 6px;
   color: orangered;
-  /* margin-top: 1.2rem; */
 }
 .nav-list {
   display: flex;
@@ -163,25 +36,21 @@ html {
 }
 .nav-list .nav-item .nav-link {
   display: flex;
-  margin-right: 1.2rem;
+  margin-right: 16px;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 17px;
   color: black;
   transition: all 0.1s ease-in-out;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
 }
 .nav-list .nav-item .first-link {
   color: #e74c3c;
   border-bottom: 2px solid #e74c3c;
-  padding-bottom: 0.3rem;
+  padding-bottom: 3px;
 }
 .nav-list .nav-item .nav-link:hover {
   color: #e74c3c;
   border-bottom: 2px solid #e74c3c;
-  padding-bottom: 0.3rem;
+  padding-bottom: 3px;
 }
 /*============HEADER-END=====*/
 /*============Form-start=====*/
@@ -192,10 +61,8 @@ html {
   justify-content: center;
 }
 .form-head {
-  width: 117rem;
-  margin: 0 auto;
-  margin-top: 5rem;
-  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
 }
 .form-title {
   background-color: #9e372c;
@@ -207,231 +74,150 @@ html {
   align-items: center;
 }
 .icon {
-  font-size: 2rem;
+  font-size: 18px;
   color: #ffffff;
-  margin-right: 0.2rem;
+  margin-right: 4px;
 }
 .form-heading {
-  font-size: 1.6rem;
+  font-size: 20px;
   color: #ffffff;
-  word-spacing: 0.3rem;
+  word-spacing: 3px;
   font-weight: 100;
-  margin-left: 0.2rem;
-}
-.select {
-  flex-basis: 22%;
-  margin-right: 0.3rem;
-  padding: 15px;
-}
-.date-input {
-  flex-basis: 20%;
-  padding: 15px;
+  margin-left: 2px;
 }
 .form {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid #e74c3c;
-  padding: 2rem;
+  padding: 10px;
+}
+.select {
+  width: 21%;
+  margin-right: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+.date-input {
+  width: 21%;
+  margin-right: 10px;
+  padding: 15px;
+  border-radius: 5px;
 }
 .search-btn {
   background-color: #c0392b;
-  flex-basis: 8%;
+  width: 8%;
   color: #ffffff;
-  font-size: 2rem;
-  padding: 1.5rem 2.5rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-}
-/* index.html style end here */
-
-/* Search.html style start here */
-.search-result {
-  width: 100%;
-}
-.view-trips {
-  width: 117rem;
-  margin: auto;
+  font-size: 20px;
+  padding: 10px 25px;
+  border-radius: 5px;
 }
 .trips-number {
-  font-size: 3.5rem;
+  font-size: 35px;
   color: #555555;
   border-bottom: 2px solid #e74c3c;
   display: inline-block;
-  margin-top: 2.6rem;
-  padding-bottom: 1.5rem;
-  margin-bottom: 2rem;
+  margin-top: 20px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 .view-card {
   display: flex;
-  flex-basis: 20%;
-  justify-content: space-around;
+  justify-content: space-between;
   border: 1px solid #f1f1f1;
-  min-height: 20vh;
-  box-shadow: 0rem 0.5rem 1rem black;
-}
-.view-card .part-1 {
-  padding: 4vh 0;
-  font-size: 2.4rem;
-  font-weight: 600;
-}
-.view-card .part-2 {
-  padding: 4vh 0;
-  font-size: 1.7rem;
-  font-weight: 100;
-}
-.view-card .part-3 {
-  padding: 4vh 0;
-  font-size: 1.7rem;
-  font-weight: 100;
-}
-.bold {
-  font-weight: bold;
-}
-.view-card .part-4 {
-  padding: 4vh 0;
-  font-size: 1.7rem;
-  font-weight: 100;
+  box-shadow: 0px 5px 10px black;
+  margin: 15px 0px;
+  padding: 20px;
 }
 .Taka {
   font-weight: bold;
-  font-size: 2.6rem;
 }
-.view-card .part-5 {
-  padding: 4vh 0;
-  font-size: 1.7rem;
-  font-weight: 100;
+.view-card .part {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: space-between;
 }
 .seat-icon {
-  font-size: 2.6rem;
+  font-size: 30px;
 }
-.part-5 .view-btn {
+.part .view-btn {
   text-decoration: none;
   background-color: #286090;
   color: white;
-  padding: 1.5rem 1.5rem;
-  font-size: 1.5rem;
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 20px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* Search.html style ends here */
-
-/* Seatplan.html start here */
 .view-seatplan {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 20px;
 }
 .show-seat {
-  width: 117rem;
-  margin: 0 auto;
-  min-height: 23rem;
-  background-color: rgba(128, 128, 128, 0.164);
-  padding: 2rem;
-  margin-bottom: 2rem;
   display: flex;
+  justify-content: space-between;
+  background-color: rgba(128, 128, 128, 0.164);
 }
 .seat-view {
-  width: 245px;
+  padding: 25px;
   background-color: #edceb8;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .seat-left {
-  padding: 2rem;
-}
-.seat-right {
-  padding: 2rem;
+  margin-right: 30px;
 }
 .seat-btn {
-  width: 4rem;
-  margin-bottom: 0.3rem;
+  width: 45px;
+  height: 25px;
+  margin-bottom: 3px;
 }
 .upper-table {
-  margin-left: 4rem;
+  margin-left: 20px;
   font-weight: 600;
   color: #666666;
-  font-size: 1.5rem;
-  padding-bottom: 0.6rem;
+  font-size: 15px;
 }
-.seat-table .content-table {
-  border-collapse: collapse;
-  font-size: 1.9rem;
-
-  margin-left: 4rem;
-  min-width: 35rem;
+.hidden {
+  display: none !important;
 }
-.content-table thead tr {
-  color: gray;
-  text-align: left;
-  font-weight: 500;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.527);
+.button-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  flex: 1;
+  margin: 20px;
 }
-.content-table th,
-.content-table td {
-  padding: 12px 15px;
-  color: gray;
-}
-.content-table tbody tr {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.527);
-}
-
-/* Seatplan.html ends here */
-
-/* A1.html style start here */
 .continue-btn {
-  margin: 5rem;
-  font-size: 1.6rem;
+  height: 30px;
+  width: 100px;
   font-weight: bold;
   border: none;
   outline: none;
   background: rgba(0, 128, 0, 0.753);
   color: white;
-  padding: 1rem 2.5rem;
-  border-radius: 5rem;
-  -webkit-border-radius: 5rem;
-  -moz-border-radius: 5rem;
-  -ms-border-radius: 5rem;
-  -o-border-radius: 5rem;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 .continue-btn .con-icon {
-  font-size: 1.6rem;
+  font-size: 18px;
   font-weight: bold;
-}
-.A1:checked {
-  background-color: green;
 }
 .selected {
   background: green;
 }
-/* A1.html style ends here */
 
-/* userhome.html style start here */
-.view-trips {
-  width: 117rem;
-  margin: auto;
-}
-.trips-number {
-  font-size: 3.5rem;
-  color: #555555;
-  border-bottom: 2px solid #e74c3c;
-  display: inline-block;
-  margin-top: 2.6rem;
-  padding-bottom: 1.5rem;
-  margin-bottom: 2rem;
-}
 .bus-info {
   width: 117rem;
   margin: auto;
@@ -457,15 +243,10 @@ html {
   line-height: 1.9rem;
 }
 .seat-table {
-  width: 400px;
+  margin-top: 20px;
 }
-
 .seat-table .content-table {
-  /* border-collapse: collapse; */
-  font-size: 1.9rem;
-
-  margin-left: 4rem;
-  /* min-width: 100rem; */
+  margin-left: 20px;
 }
 .content-table thead tr {
   color: gray;
@@ -475,11 +256,11 @@ html {
 }
 .content-table th,
 .content-table td {
-  padding: 12px 15px;
+  padding: 10px 35px;
   color: gray;
 }
-.content-table tbody tr {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.527);
+.content-table tbody tr.table-row {
+  border-top: 1px solid rgba(128, 128, 128, 0.527);
 }
 .user-pay {
   width: 100%;
@@ -507,10 +288,6 @@ html {
   color: white;
   padding: 1rem 2.5rem;
   border-radius: 5rem;
-  -webkit-border-radius: 5rem;
-  -moz-border-radius: 5rem;
-  -ms-border-radius: 5rem;
-  -o-border-radius: 5rem;
   display: flex;
   align-items: center;
   margin-left: 1rem;
@@ -521,5 +298,3 @@ html {
   margin-left: 0.4rem;
   font-size: 2.3rem;
 }
-
-/* userhome.html style ends here */

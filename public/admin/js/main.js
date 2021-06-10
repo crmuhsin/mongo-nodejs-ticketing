@@ -1,6 +1,6 @@
 let head = document.getElementById("headTemplate");
 head.innerHTML = `<h2>Admin Panel</h2>
-      <nav class="mainmenu clear">
+      <nav class="mainmenu">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="user.html">User</a></li>
@@ -10,14 +10,6 @@ head.innerHTML = `<h2>Admin Panel</h2>
       </nav>`;
 let leftSide = document.getElementById("leftSide");
 leftSide.innerHTML = `
-        
-        <div class="samesidebar">
-          <h2>Bus Option</h2>
-          <ul>
-            <li> <a href="addbus.html"> Add Bus</a></li>
-            <li> <a href="listbus.html"> Bus List</a></li>
-          </ul>
-        </div>
         <div class="samesidebar">
           <h2>Station Option</h2>
           <ul>

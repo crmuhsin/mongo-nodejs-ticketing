@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const busContoller = require("./controllers/busController");
 const stationController = require("./controllers/stationController");
 const tripController = require("./controllers/tripController");
+const bookingController = require("./controllers/bookingController");
 
 // database connection
 mongoose.connect("mongodb://localhost:27017/exclusive");
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 busContoller(app, mongoose);
 stationController(app, mongoose);
 tripController(app, mongoose);
+bookingController(app, mongoose);
 
 /**bodyParser.json(options)
  * Parses the text as JSON and exposes the resulting object on req.body.

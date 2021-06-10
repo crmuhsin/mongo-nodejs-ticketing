@@ -9,73 +9,71 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
         integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
-
 </head>
 
 <body>
-    <header class="head">
-        <nav class="navbar">
-            <div class="logo-text">
-                <h1>Exclusive Travels</h1>
+    <div id="main">
+        <header class="head">
+            <nav class="navbar">
+                <div class="logo-text">
+                    <h1>Exclusive Travels</h1>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item "><a href="" class="nav-link first-link">HOME</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">LOCATION</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">CONTACT US</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="form-section">
+            <div class="form-head">
+                <div class="form-title">
+                    <span class="icon">
+                        <ion-icon name="ticket-outline"></ion-icon>
+                    </span>
+                    <h3 class="form-heading">Buy Ticket</h3>
+                </div>
+                <form class="form" onsubmit="searchTrips(fromStation,toStation, journeyDate,coachType);return false;">
+                    <select class="select" name="fromStation" required id="showFromStation">
+                        <option value="">From</option>
+                        <!-- <option value="60bf4360ec6cac05f80dfa35">From</option> -->
+                    </select>
+                    <select class="select" name="toStation" required id="showToStation">
+                        <option value="">To</option>
+                        <!-- <option value="60bf4374ec6cac05f80dfa36">To</option> -->
+                    </select>
+                    <input type="date" class="date-input" name="journeyDate" id="journeyDate" required>
+
+                    <select class="select" name="coachType">
+                        <option value="">Coach Type</option>
+                        <option value="AC">AC</option>
+                        <option value="Non AC">Non AC</option>
+                    </select>
+                    <button type="submit" class="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                </form>
             </div>
-            <ul class="nav-list">
-                <li class="nav-item "><a href="" class="nav-link first-link">HOME</a></li>
-                <li class="nav-item"><a href="" class="nav-link">LOCATION</a></li>
-                <li class="nav-item"><a href="" class="nav-link">CONTACT US</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="form-section">
-        <div class="form-head">
-            <div class="form-title">
-                <span class="icon">
-                    <ion-icon name="ticket-outline"></ion-icon>
-                </span>
-                <h3 class="form-heading">Buy Ticket</h3>
+        </section>
+        <section class="search-result">
+            <div id="viewTrips">
+                <div class="trips">
+                    <h2 class="trips-number">Available Trips: </h2>
+                </div>
             </div>
-            <form action="#" class="form">
-                <select class="select" name="fromStation" required id="showFromStation">
-                    <option value="">From</option>
-                </select>
-                <select class="select" name="toStation" required id="showToStation">
-                    <option value="">To</option>
-                </select> <br>
-                <input type="date" class="date-input">
+        </section>
+        <section class="view-seatplan" id="showseat"></section>
+    </div>
 
-                <select class="select">
-                    <option>Coach Type</option>
-                    <option value="">AC</option>
-                    <option value="">Non AC</option>
-                </select>
-                <button type="button" onclick="searchTrips(fromStation,toStation)" class="search-btn">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
-            </form>
-        </div>
-    </section>
-    <section class="search-result">
-        <div class="view-trips" id="viewTrips">
-            <div class="trips">
-                <h2 class="trips-number">Available Trips: </h2>
-            </div>
-        </div>
-    </section> <br>
-    <section class="view-seatplan" id="showseat">
-
-    </section>
-
-
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="js/seatplan.js"></script>
     <script src="js/search.js"></script>
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <!-- <script src="admin/js/trip.js"></script> -->
-
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <!-- <script src="../public/admin/js/station.js"></script> -->
 
     <script>
+        let dateElement = document.getElementById("journeyDate");
+        dateElement.min = new Date().toISOString().slice(0, 10);
+        dateElement.value = new Date().toISOString().slice(0, 10);
         dynamicStation();
     </script>
 

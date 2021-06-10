@@ -31,12 +31,14 @@ module.exports = function (zapp, mongoose) {
   zapp.post("/search-trip", function (req, res) {
     // get data from the view and add it to mongodb
     // console.log(req.body);
-    Trip.find(
-      {
-        from_station_id: req.body.fromStationId,
-        to_station_id: req.body.toStationId,
-      },
-      function (err, data) {
+    let searchQuery = {
+      from_station_id: req.body.fromStationId,
+      to_station_id: req.body.toStationId
+    };
+    if (req.body.coachType) {
+      searchQuery.coach_type = req.body.coachType;
+    }
+    Trip.find(searchQuery, function (err, data) {
         if (err) throw err;
         res.send(data);
       }

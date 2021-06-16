@@ -218,42 +218,35 @@ body {
 .booked {
   background: grey;
 }
-
 .bus-info {
-  width: 117rem;
+  width: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
 }
-.bus-info-left {
-  width: 30%;
-  border: 2px solid #555555;
-  padding: 3rem 1rem;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #555555;
-  line-height: 1.9rem;
+.bus-info-box {
+  width: 45%;
+  border: 2px solid #ebeeee;
+  padding: 15px;
 }
-.bus-info-right {
-  width: 30%;
-  border: 2px solid #555555;
-  padding: 3rem 1rem;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #555555;
-  line-height: 1.9rem;
+.info-head {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+.info-sub {
+  font-size: 18px;
 }
 .seat-table {
   margin-top: 20px;
 }
 .seat-table .content-table {
-  margin-left: 20px;
+  width: 100%;
 }
-.content-table thead tr {
+.content-table thead {
   color: gray;
   text-align: left;
   font-weight: 500;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.527);
+  border-bottom: 1px solid black;
 }
 .content-table th,
 .content-table td {

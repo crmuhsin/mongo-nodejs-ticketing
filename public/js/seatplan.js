@@ -164,21 +164,30 @@ function selectSeatTable (seatName, tripIndex, element) {
 }
 
 function continueToCart(tripIndex) {
-  openModal();
-  // var booking = {
-  //   trip_id: tripList[tripIndex]._id,
-  //   user_id: "muhsin",
-  //   date: searchDate,
-  //   seat_list: seatArray[tripIndex].map((el) => el.seatname)
-  // };
-  // fetch("/booking", {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(booking),
-  // }).then((response) => {
-  //   location.replace("./userhome.html");
-  // });
+  let userInfo = "";
+  if (localStorage.getItem("info")) {
+    userInfo = JSON.parse(localStorage.getItem("info"))
+  }
+  if (userInfo && userInfo.user_id) {
+    var booking = {
+      trip_id: tripList[tripIndex]._id,
+      user_id: userInfo.user_id,
+      date: searchDate,
+      seat_list: seatArray[tripIndex].map((el) => el.seatname)
+    };
+    fetch("/booking", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      location.replace(`./cart.html?bookingId=${response._id}`);
+    });
+  } else {
+    openModal('Login');
+  }
 }

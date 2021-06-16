@@ -8,13 +8,14 @@ module.exports = function (zapp, mongoose) {
   });
 
   var Booking = mongoose.model("Booking", bookingSchema);
-  // zapp.get("/booking", function (req, res) {
-  //   //get data from mongodb and pass it to view
-  //   Booking.find({trip_id: req.body.tripId}, function (err, data) {
-  //     if (err) throw err;
-  //     res.send(data);
-  //   });
-  // });
+  //find
+  zapp.get("/booking/:item", function (req, res) {
+    //get data from mongodb and pass it to view
+    Booking.find({ _id: req.params.item }, function (err, data) {
+      if (err) throw err;
+      res.send(data);
+    });
+  });
 
   zapp.post("/booking", function (req, res) {
     // get data from the view and add it to mongodb

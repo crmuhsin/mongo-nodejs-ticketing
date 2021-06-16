@@ -7,7 +7,7 @@ const bookingController = require("./controllers/bookingController");
 const userController = require("./controllers/userController");
 
 // database connection
-mongoose.connect('mongodb://localhost:27017/myapp', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/exclusive', {useNewUrlParser: true, useUnifiedTopology: true});
 const express = require("express");
 const path = require("path");
 

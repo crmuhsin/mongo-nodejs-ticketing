@@ -18,11 +18,7 @@
                 <div class="logo-text">
                     <h1>Exclusive Travels</h1>
                 </div>
-                <ul class="nav-list">
-                    <li class="nav-item "><a href="" class="nav-link first-link">HOME</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">LOCATION</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">CONTACT US</a></li>
-                </ul>
+                <ul class="nav-list" id="navList"></ul>
             </nav>
         </header>
         <section class="form-section">
@@ -65,6 +61,22 @@
         <section class="view-seatplan" id="showseat"></section>
     </div>
 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-head">
+                <h3 id="modalHead"></h3>
+                <button class="close" id="closeModal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="message">
+                <h5 id="modalMsg"></h5>
+            </div>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="js/usermodal.js"></script>
     <script src="js/seatplan.js"></script>
     <script src="js/search.js"></script>
 

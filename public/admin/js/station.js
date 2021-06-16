@@ -3,7 +3,6 @@ function addItem(station_name, desc) {
     station_name: station_name.value,
     desc: desc.value,
   };
-  console.log(station);
   fetch("/station", {
     method: "POST",
     headers: {
@@ -29,7 +28,6 @@ function editItem(station_name, desc, stationId) {
     },
     body: JSON.stringify(station),
   }).then((response) => {
-    console.log(response);
     // location.reload();
     location.replace(response.url);
   });
@@ -41,7 +39,6 @@ function getAllstation() {
       // location.reload();
     })
     .then((response) => {
-      console.log(response);
       // location.reload();
       let table = document.getElementById("stationList");
       for (let i = 0; i < response.length; i++) {
@@ -64,7 +61,6 @@ function getAllstation() {
     });
 }
 function stationDelete(id) {
-  console.log(1);
   var r = confirm("Are you sure you want to delete this station");
   if (r == true) {
     removestation(id);
@@ -84,10 +80,8 @@ function getStation(stationId) {
     })
     .then((response) => {
       let station_nameEl = document.getElementById("station_name");
-      console.log(response);
       station_nameEl.value = response[0].station_name;
       let descEl = document.getElementById("desc");
-      console.log(response);
       descEl.value = response[0].desc;
     });
 }

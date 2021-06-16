@@ -20,7 +20,6 @@ module.exports = function (zapp, mongoose) {
     // get data from the view and add it to mongodb
     var newBooking = Booking(req.body).save(function (err, data) {
       if (err) throw err;
-      console.log(data);
       res.json(data);
     });
   });
@@ -54,7 +53,6 @@ module.exports = function (zapp, mongoose) {
   // //update
   // zapp.post("/trip/:item", function (req, res) {
   //   // get data from the view and add it to mongodb
-  //   console.log(req.body);
   //   Booking.update(
   //     { _id: req.params.item },
   //     req.body,

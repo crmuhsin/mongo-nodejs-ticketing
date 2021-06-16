@@ -9,6 +9,7 @@ function viewSeat(index) {
   if (checkOpen) {
     checkOpen.parentNode.removeChild(checkOpen);
     viewseats.innerHTML = "";
+    showseat.appendChild(viewseats);
   } else {
     viewseats.innerHTML = `<div class="show-seat" id="showSeats-${index}">
           <div class="seat-view">
@@ -73,9 +74,9 @@ function viewSeat(index) {
             <button type="button" onclick="continueToCart('${index}')" class="continue-btn hidden" id="continueBtn-${index}">Continue</button>
           </div>
       </div>`;
+      showseat.appendChild(viewseats);
+      fillSeatData(index);
   }
-  showseat.appendChild(viewseats);
-  fillSeatData(index);
 }
 function fillSeatData(index) {
   let searchItems = { 
@@ -163,20 +164,21 @@ function selectSeatTable (seatName, tripIndex, element) {
 }
 
 function continueToCart(tripIndex) {
-  var booking = {
-    trip_id: tripList[tripIndex]._id,
-    user_id: "muhsin",
-    date: searchDate,
-    seat_list: seatArray[tripIndex].map((el) => el.seatname)
-  };
-  fetch("/booking", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(booking),
-  }).then((response) => {
-    // location.replace(response.url);
-  });
+  openModal();
+  // var booking = {
+  //   trip_id: tripList[tripIndex]._id,
+  //   user_id: "muhsin",
+  //   date: searchDate,
+  //   seat_list: seatArray[tripIndex].map((el) => el.seatname)
+  // };
+  // fetch("/booking", {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(booking),
+  // }).then((response) => {
+  //   location.replace("./userhome.html");
+  // });
 }

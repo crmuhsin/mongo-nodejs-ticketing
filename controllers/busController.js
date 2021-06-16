@@ -10,14 +10,12 @@ module.exports = function (zapp, mongoose) {
     //get data from mongodb and pass it to view
     Bus.find({}, function (err, data) {
       if (err) throw err;
-      console.log(data);
       res.send(data);
     });
   });
 
   zapp.post("/bus", function (req, res) {
     // get data from the view and add it to mongodb
-    console.log(req.body);
     var newBus = Bus(req.body).save(function (err, data) {
       if (err) throw err;
       // res.json(data);
@@ -37,14 +35,12 @@ module.exports = function (zapp, mongoose) {
     //get data from mongodb and pass it to view
     Bus.find({ _id: req.params.item }, function (err, data) {
       if (err) throw err;
-      console.log(data);
       res.send(data);
     });
   });
   //update
   zapp.post("/bus/:item", function (req, res) {
     // get data from the view and add it to mongodb
-    console.log(req.body);
     Bus.update(
       { _id: req.params.item },
       req.body,

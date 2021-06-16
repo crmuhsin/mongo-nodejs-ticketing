@@ -20,7 +20,6 @@ module.exports = function (zapp, mongoose) {
 
   zapp.post("/trip", function (req, res) {
     // get data from the view and add it to mongodb
-    console.log(req);
     var newTrip = Trip(req.body).save(function (err, data) {
       if (err) throw err;
       // res.json(data);
@@ -30,7 +29,6 @@ module.exports = function (zapp, mongoose) {
 
   zapp.post("/search-trip", function (req, res) {
     // get data from the view and add it to mongodb
-    // console.log(req.body);
     let searchQuery = {
       from_station_id: req.body.fromStationId,
       to_station_id: req.body.toStationId
@@ -65,14 +63,12 @@ module.exports = function (zapp, mongoose) {
     //get data from mongodb and pass it to view
     Trip.find({ _id: req.params.item }, function (err, data) {
       if (err) throw err;
-      console.log(data);
       res.send(data);
     });
   });
   //update
   zapp.post("/trip/:item", function (req, res) {
     // get data from the view and add it to mongodb
-    console.log(req.body);
     Trip.update(
       { _id: req.params.item },
       req.body,

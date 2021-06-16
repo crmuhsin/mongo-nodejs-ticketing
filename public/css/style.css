@@ -41,16 +41,14 @@ body {
   font-size: 17px;
   color: black;
   transition: all 0.1s ease-in-out;
-}
-.nav-list .nav-item .first-link {
-  color: #e74c3c;
-  border-bottom: 2px solid #e74c3c;
+  border: none;
+  border-bottom: 2px solid transparent;
   padding-bottom: 3px;
+  background-color: transparent;
 }
 .nav-list .nav-item .nav-link:hover {
   color: #e74c3c;
   border-bottom: 2px solid #e74c3c;
-  padding-bottom: 3px;
 }
 /*============HEADER-END=====*/
 /*============Form-start=====*/
@@ -300,4 +298,84 @@ body {
 .pay-btn .card-icon {
   margin-left: 0.4rem;
   font-size: 2.3rem;
+}
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  border-radius: 6px;
+}
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+}
+.modal-link{
+  color: #f14141;
+  cursor: pointer;
+}
+.modal-link:hover{
+  opacity: 0.8;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.text-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+.btn-form {
+  background-color: #04aa6d;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 6px;
+}
+.btn-form:hover {
+  opacity: 0.8;
 }

@@ -12,8 +12,6 @@ function viewTrip(searchItems) {
     })
     .then((response) => {
       let viewTrip = document.getElementById("viewTrips");
-      var today = new Date();
-      var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
       viewTrip.innerHTML = `<div class="trips">
                 <h2 class="trips-number">Available Trips: </h2>
             </div>`;

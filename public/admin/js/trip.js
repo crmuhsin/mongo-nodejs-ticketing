@@ -51,8 +51,6 @@ function editItem(
     },
     body: JSON.stringify(trip),
   }).then((response) => {
-    console.log(response);
-    // location.reload();
     location.replace(response.url);
   });
 }
@@ -66,7 +64,6 @@ function getAlltrip() {
       for (let i = 0; i < response.length; i++) {
         response[i].from_station_name = getStation(response[i].from_station_id);
         response[i].to_station_name = getStation(response[i].to_station_id);
-        // console.log(response);
         let tr = document.createElement("tr");
         tr.innerHTML = ` <tr>
                 <td>${i + 1}</td>
@@ -92,7 +89,6 @@ function dynamicStation() {
     })
     .then((response) => {
       stationList = response;
-      console.log(stationList);
 
       let table = document.getElementById("tripList");
       if (table) {
@@ -113,7 +109,6 @@ function dynamicStation() {
     });
 }
 function tripDelete(id) {
-  console.log(1);
   var r = confirm("Are you sure you want to delete this trip");
   if (r == true) {
     removetrip(id);
@@ -137,16 +132,12 @@ function getTrip(tripId) {
     })
     .then((response) => {
       let from_station_idEl = document.getElementById("fromStation");
-      console.log(response);
       from_station_idEl.value = response[0].from_station_id;
       let to_station_idEl = document.getElementById("toStation");
-      console.log(response);
       to_station_idEl.value = response[0].to_station_id;
       let deperture_timeEl = document.getElementById("deperture_time");
-      console.log(response);
       deperture_timeEl.value = response[0].deperture_time;
       let fareEl = document.getElementById("fare");
-      console.log(response);
       fareEl.value = response[0].fare;
     });
 }

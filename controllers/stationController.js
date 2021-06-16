@@ -16,7 +16,6 @@ module.exports = function (zapp, mongoose) {
 
   zapp.post("/station", function (req, res) {
     // get data from the view and add it to mongodb
-    console.log(req.body);
     var newStation = Station(req.body).save(function (err, data) {
       if (err) throw err;
       // res.json(data);
@@ -36,7 +35,6 @@ module.exports = function (zapp, mongoose) {
     //get data from mongodb and pass it to view
     Station.find({ _id: req.params.item }, function (err, data) {
       if (err) throw err;
-      console.log(data);
       res.send(data);
     });
   });
@@ -44,7 +42,6 @@ module.exports = function (zapp, mongoose) {
   //update
   zapp.post("/station/:item", function (req, res) {
     // get data from the view and add it to mongodb
-    console.log(req.body);
     Station.update(
       { _id: req.params.item },
       req.body,

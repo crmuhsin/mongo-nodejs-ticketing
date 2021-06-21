@@ -16,7 +16,7 @@
     <header class="head">
       <nav class="navbar">
         <div class="logo-text">
-          <h1>Exclusive Travels</h1>
+          <a href="/">Exclusive Travels</a>
         </div>
         <ul class="nav-list" id="navList"></ul>
       </nav>
@@ -29,50 +29,29 @@
         <div class="bus-info">
           <div class="bus-info-box">
             <div class="info-head">Coach Information</div>
-            <div class="info-sub"><b>Bus No: </b><span id="coach_no">ka-1212</span></div>
-            <div class="info-sub"><b>Type: </b><span id="coach_type">AC</span></div>
+            <div class="info-sub"><b>Bus No: </b><span id="coach_no"></span></div>
+            <div class="info-sub"><b>Type: </b><span id="coach_type"></span></div>
           </div>
           <div class="bus-info-box">
             <div class="info-head">Time Information</div>
-            <div class="info-sub"><b>Date: </b><span id="departure_date">14 April, 2021</span></div>
-            <div class="info-sub"><b>Departure Time: </b><span id="departure_time">06:00am</span></div>
+            <div class="info-sub"><b>Date: </b><span id="departure_date"></span></div>
+            <div class="info-sub"><b>Departure Time: </b><span id="departure_time"></span></div>
           </div>
         </div>
-        <div class="seat-table">
-          <table class="content-table">
-            <thead>
-              <tr class="table-data">
-                <th>#</th>
-                <th>Seat</th>
-                <th>Route</th>
-                <th>Fare</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr class="table-data">
-                <td>1</td>
-                <td>A-1</td>
-                <td>Dhaka To Chittagong</td>
-                <td>1,600.00</td>
-              </tr>
-              <tr class="table-data">
-                <td>Total</td>
-                <td></td>
-                <td></td>
-                <td>1,600.00</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="user-pay">
-            <label for="checkbox" class="table-check"> <input class="table-check" type="checkbox">I agree
-              with all term and
-              condition.</label>
-            <div class="btn">
-              <button type="button" class="back-btn">Back</button>
-              <button type="button" class="pay-btn">Proceed to pay <ion-icon class="card-icon" name="card-outline">
-                </ion-icon></button>
-            </div>
+        <div class="cart-table">
+          <table class="content-table" id="cartTable"></table>
+        </div>
+        <div class="user-pay">
+          <div>
+            <input id="tablecheck" type="checkbox">
+            <label for="tablecheck" class="table-check">I agree with all term and condition.</label>
+          </div>
+          <div class="pay-buttons">
+            <button type="button" class="back-btn">Back</button>
+            <button type="button" class="pay-btn">
+              <ion-icon class="card-icon" name="card-outline"></ion-icon>
+              Proceed to pay
+            </button>
           </div>
         </div>
 

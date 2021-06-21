@@ -5,6 +5,7 @@ module.exports = function (zapp, mongoose) {
     user_id: String,
     date: String,
     seat_list: Array,
+    created_date: Date
   });
 
   var Booking = mongoose.model("Booking", bookingSchema);
@@ -27,7 +28,11 @@ module.exports = function (zapp, mongoose) {
 
   zapp.post("/booking-by-trip", function (req, res) {
     // get data from the view and add it to mongodb
-    Booking.find({trip_id: req.body.tripId, date: req.body.searchDate}, function (err, data) {
+    let tripQuery = { 
+      trip_id: req.body.tripId,
+      date: req.body.searchDate
+    };
+    Booking.find(tripQuery, function (err, data) {
         if (err) throw err;
         res.send(data);
       }
@@ -44,11 +49,38 @@ module.exports = function (zapp, mongoose) {
   // });
 
   //find
-  zapp.get("/all-booking", function (req, res) {
+  zapp.post("/all-booking", function (req, res) {
+    var limit = req.body.limit;
+    var pageNo = req.body.pageNo - 1;
+    var skip = pageNo * limit;
+    var totalCount;
     //get data from mongodb and pass it to view
-    Booking.find({}, function (err, data) {
-      if (err) throw err;
-      res.send(data);
+    Booking.countDocuments({}, function (err, count) {
+      if (err) {
+        totalCount = 0;
+      } else {
+        totalCount = count;
+      }
+      Booking.find()
+      .sort({created_date: 'desc'})
+      .skip(skip)
+      .limit(limit)
+      .exec(function (err, data) {
+        if (err) {
+          return callback("Error Occured", null);
+        } else if (!data) {
+          return callback("Docs Not Found", null);
+        } else {
+          var result = {
+            totalRecords: totalCount,
+            currentPage: pageNo + 1,
+            totalPages: Math.ceil(totalCount / limit),
+            result: data,
+            limit
+          };
+          return res.status(200).json(result);
+        }
+      });
     });
   });
   // //update

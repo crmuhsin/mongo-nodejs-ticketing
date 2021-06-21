@@ -22,11 +22,12 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.navbar .logo-text {
-  font-size: 20px;
+.navbar .logo-text a {
+  font-size: 32px;
   font-weight: 900;
   letter-spacing: 6px;
   color: orangered;
+  text-decoration: none;
 }
 .nav-list {
   display: flex;
@@ -193,25 +194,6 @@ body {
   flex: 1;
   margin: 20px;
 }
-.continue-btn {
-  height: 30px;
-  width: 100px;
-  font-weight: bold;
-  border: none;
-  outline: none;
-  background: rgba(0, 128, 0, 0.753);
-  color: white;
-  padding: 10px 20px;
-  margin: 20px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.continue-btn .con-icon {
-  font-size: 18px;
-  font-weight: bold;
-}
 .selected {
   background: green;
 }
@@ -238,59 +220,72 @@ body {
 }
 .seat-table {
   margin-top: 20px;
+  margin-left: 20px;
 }
-.seat-table .content-table {
+.cart-table {
+  margin-top: 20px;
+}
+.content-table {
   width: 100%;
+  border-collapse: collapse;
 }
 .content-table thead {
   color: gray;
-  text-align: left;
+  text-align: center;
   font-weight: 500;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.527);
 }
 .content-table th,
 .content-table td {
+  text-align: center;
   padding: 10px 35px;
   color: gray;
 }
-.content-table tbody tr.table-row {
+.content-table tbody:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.content-table tbody.table-row {
   border-top: 1px solid rgba(128, 128, 128, 0.527);
+  background-color: #ffffff !important;
 }
 .user-pay {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
 }
 .table-check {
-  font-size: 1.7rem;
-  margin-top: 4rem;
+  font-size: 17px;
 }
-.btn {
-  margin-top: 2rem;
+.pay-buttons {
+  margin-top: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .pay-btn,
-.back-btn {
-  font-size: 1.6rem;
-  font-weight: bold;
+.back-btn,
+.continue-btn {
+  font-size: 18px;
   border: none;
   outline: none;
   background: rgba(0, 128, 0, 0.753);
   color: white;
-  padding: 1rem 2.5rem;
-  border-radius: 5rem;
+  padding: 10px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  margin-left: 1rem;
-  margin-bottom: 2rem;
+  margin-left: 10px;
   cursor: pointer;
 }
+.continue-btn {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.continue-btn .con-icon,
 .pay-btn .card-icon {
-  margin-left: 0.4rem;
-  font-size: 2.3rem;
+  margin-right: 4px;
+  font-size: 20px;
 }
 /* Change the white to any color */
 input:-webkit-autofill,

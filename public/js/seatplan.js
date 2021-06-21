@@ -70,8 +70,11 @@ function viewSeat(index) {
             <div class="seat-count">
               <div class="upper-table">Selected Seats: <span id="totalSeat-${index}">0</span> (Max 5)</div>
               <div class="upper-table">Total Fare: <span id="totalFare-${index}">0</span></div>
+              <button type="button" onclick="continueToCart('${index}')" class="continue-btn hidden" id="continueBtn-${index}">
+                <ion-icon class="con-icon" name="arrow-forward-outline"></ion-icon>
+                Continue
+              </button>
             </div>
-            <button type="button" onclick="continueToCart('${index}')" class="continue-btn hidden" id="continueBtn-${index}">Continue</button>
           </div>
       </div>`;
       showseat.appendChild(viewseats);
@@ -173,7 +176,8 @@ function continueToCart(tripIndex) {
       trip_id: tripList[tripIndex]._id,
       user_id: userInfo.user_id,
       date: searchDate,
-      seat_list: seatArray[tripIndex].map((el) => el.seatname)
+      seat_list: seatArray[tripIndex].map((el) => el.seatname),
+      created_date: new Date()
     };
     fetch("/booking", {
       method: "POST",

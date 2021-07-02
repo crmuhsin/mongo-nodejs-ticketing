@@ -1,12 +1,40 @@
-const PDFDocument = require("pdfkit");
 
-function createInvoice(invoice, writeStream) {
+const PDFDocument = require("pdfkit");
+const ticket = {
+  shipping: {
+    name: "John Doe",
+    address: "1234 Main Street",
+    city: "San Francisco",
+    state: "CA",
+    country: "US",
+    postal_code: 94111
+  },
+  items: [
+    {
+      item: "TC 100",
+      description: "Toner Cartridge",
+      quantity: 2,
+      amount: 6000
+    },
+    {
+      item: "USB_EXT",
+      description: "USB Cable Extender",
+      quantity: 1,
+      amount: 2000
+    }
+  ],
+  subtotal: 8000,
+  paid: 0,
+  ticket_nr: 1234
+};
+
+function createTicket(writeStream) {
   let doc = new PDFDocument({ size: "A4", margin: 50 });
   doc.pipe(writeStream);
 
   generateHeader(doc);
-  generateCustomerInformation(doc, invoice);
-  generateInvoiceTable(doc, invoice);
+  generateCustomerInformation(doc, ticket);
+  generateTicketTable(doc, ticket);
   generateFooter(doc);
 
   doc.end();
@@ -14,7 +42,6 @@ function createInvoice(invoice, writeStream) {
 
 function generateHeader(doc) {
   doc
-    .image("pdf/logo.png", 50, 45, { width: 50 })
     .fillColor("#444444")
     .fontSize(20)
     .text("ACME Inc.", 110, 57)
@@ -25,11 +52,11 @@ function generateHeader(doc) {
     .moveDown();
 }
 
-function generateCustomerInformation(doc, invoice) {
+function generateCustomerInformation(doc, ticket) {
   doc
     .fillColor("#444444")
     .fontSize(20)
-    .text("Invoice", 50, 160);
+    .text("Ticket", 50, 160);
 
   generateHr(doc, 185);
 
@@ -37,29 +64,29 @@ function generateCustomerInformation(doc, invoice) {
 
   doc
     .fontSize(10)
-    .text("Invoice Number:", 50, customerInformationTop)
+    .text("Ticket Number:", 50, customerInformationTop)
     .font("Helvetica-Bold")
-    .text(invoice.invoice_nr, 150, customerInformationTop)
+    .text(ticket.ticket_nr, 150, customerInformationTop)
     .font("Helvetica")
-    .text("Invoice Date:", 50, customerInformationTop + 15)
+    .text("Ticket Date:", 50, customerInformationTop + 15)
     .text(formatDate(new Date()), 150, customerInformationTop + 15)
     .text("Balance Due:", 50, customerInformationTop + 30)
     .text(
-      formatCurrency(invoice.subtotal - invoice.paid),
+      formatCurrency(ticket.subtotal - ticket.paid),
       150,
       customerInformationTop + 30
     )
 
     .font("Helvetica-Bold")
-    .text(invoice.shipping.name, 300, customerInformationTop)
+    .text(ticket.shipping.name, 300, customerInformationTop)
     .font("Helvetica")
-    .text(invoice.shipping.address, 300, customerInformationTop + 15)
+    .text(ticket.shipping.address, 300, customerInformationTop + 15)
     .text(
-      invoice.shipping.city +
+      ticket.shipping.city +
         ", " +
-        invoice.shipping.state +
+        ticket.shipping.state +
         ", " +
-        invoice.shipping.country,
+        ticket.shipping.country,
       300,
       customerInformationTop + 30
     )
@@ -68,26 +95,26 @@ function generateCustomerInformation(doc, invoice) {
   generateHr(doc, 252);
 }
 
-function generateInvoiceTable(doc, invoice) {
+function generateTicketTable(doc, ticket) {
   let i;
-  const invoiceTableTop = 330;
+  const ticketTableTop = 330;
 
   doc.font("Helvetica-Bold");
   generateTableRow(
     doc,
-    invoiceTableTop,
+    ticketTableTop,
     "Item",
     "Description",
     "Unit Cost",
     "Quantity",
     "Line Total"
   );
-  generateHr(doc, invoiceTableTop + 20);
+  generateHr(doc, ticketTableTop + 20);
   doc.font("Helvetica");
 
-  for (i = 0; i < invoice.items.length; i++) {
-    const item = invoice.items[i];
-    const position = invoiceTableTop + (i + 1) * 30;
+  for (i = 0; i < ticket.items.length; i++) {
+    const item = ticket.items[i];
+    const position = ticketTableTop + (i + 1) * 30;
     generateTableRow(
       doc,
       position,
@@ -101,7 +128,7 @@ function generateInvoiceTable(doc, invoice) {
     generateHr(doc, position + 20);
   }
 
-  const subtotalPosition = invoiceTableTop + (i + 1) * 30;
+  const subtotalPosition = ticketTableTop + (i + 1) * 30;
   generateTableRow(
     doc,
     subtotalPosition,
@@ -109,7 +136,7 @@ function generateInvoiceTable(doc, invoice) {
     "",
     "Subtotal",
     "",
-    formatCurrency(invoice.subtotal)
+    formatCurrency(ticket.subtotal)
   );
 
   const paidToDatePosition = subtotalPosition + 20;
@@ -120,7 +147,7 @@ function generateInvoiceTable(doc, invoice) {
     "",
     "Paid To Date",
     "",
-    formatCurrency(invoice.paid)
+    formatCurrency(ticket.paid)
   );
 
   const duePosition = paidToDatePosition + 25;
@@ -132,7 +159,7 @@ function generateInvoiceTable(doc, invoice) {
     "",
     "Balance Due",
     "",
-    formatCurrency(invoice.subtotal - invoice.paid)
+    formatCurrency(ticket.subtotal - ticket.paid)
   );
   doc.font("Helvetica");
 }
@@ -188,5 +215,5 @@ function formatDate(date) {
 }
 
 module.exports = {
-  createInvoice
+  createTicket
 };

@@ -25,8 +25,7 @@ module.exports = function (zapp, mongoose) {
             token: Helper.generateToken(req.body.username),
             username: req.body.username,
             email: req.body.email,
-            user_type: req.body.user_type,
-            user_id: data[0]._id
+            user_type: req.body.user_type
           }
           return res.status(200).send(info);
         });

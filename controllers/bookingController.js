@@ -1,5 +1,6 @@
-const pdf = require("../pdf");
+const pdf = require("../ticket");
 const Helper = require("./Helper");
+const mailer = require("../mailer");
 const fs = require("fs");
 
 module.exports = function (zapp, mongoose) {
@@ -43,26 +44,20 @@ module.exports = function (zapp, mongoose) {
     );
   });
 
-  zapp.get("/create-ticket", function (req, res) {
+  zapp.post("/create-ticket", function (req, res) {
     // get data from the view and add it to mongodb
     let fileName = Helper.hashPassword("abc").slice(5, 15);
-    let writeStream = fs.createWriteStream(`public/output/${fileName}.pdf`);
+    let filePath = `public/output/${fileName}.pdf`;
+    let writeStream = fs.createWriteStream(filePath);
     pdf.createTicket(writeStream);
-    
+
+    let mailParams = { to: req.body.to };
     writeStream.on('finish', function () {
       // do stuff with the PDF file
+      mailer.sendMail(mailParams, filePath);
       res.send({fileName});
     });
   });
-
-  // //delete
-  // zapp.delete("/trip/:item", function (req, res) {
-  //   // delete requested item from mongodb
-  //   Booking.find({ _id: req.params.item }).remove(function (err, data) {
-  //     if (err) throw err;
-  //     res.json(data);
-  //   });
-  // });
 
   //find
   zapp.post("/all-booking", function (req, res) {

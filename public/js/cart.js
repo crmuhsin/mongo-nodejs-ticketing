@@ -72,7 +72,14 @@ function getCurrentTrip(tripId, seatList) {
     });
 }
 function createTicket() {
-  fetch("/create-ticket")
+  fetch("/create-ticket", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({to: "crmuhsin@gmail.com"}),
+  })
     .then((response) => {
       return response.json();
     })

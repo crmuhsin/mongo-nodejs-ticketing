@@ -71,4 +71,18 @@ function getCurrentTrip(tripId, seatList) {
 
     });
 }
+function createTicket() {
+  fetch("/create-ticket")
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      setTimeout(() => {
+        let a= document.createElement('a');
+        a.target= '_blank';
+        a.href= `output/${response.fileName}.pdf`;
+        a.click();
+      }, 2000);
+    });
+}
 getStations();

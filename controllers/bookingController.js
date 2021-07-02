@@ -1,3 +1,6 @@
+const pdf = require("../pdf");
+const Helper = require("./Helper");
+
 module.exports = function (zapp, mongoose) {
   //create  a schema - this is like a blueprint
   var bookingSchema = new mongoose.Schema({
@@ -37,6 +40,13 @@ module.exports = function (zapp, mongoose) {
         res.send(data);
       }
     );
+  });
+
+  zapp.get("/create-ticket", function (req, res) {
+    // get data from the view and add it to mongodb
+    let fileName = Helper.hashPassword("abc").slice(5, 15);
+    pdf.createTicket(fileName);
+    res.send({fileName});
   });
 
   // //delete

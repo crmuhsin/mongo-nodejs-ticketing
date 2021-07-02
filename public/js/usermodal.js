@@ -1,6 +1,6 @@
+var userInfo = "";
 function updateNavbar() {
   let nav = document.getElementById("navList");
-  let userInfo = "";
   if (localStorage.getItem("info")) {
     userInfo = JSON.parse(localStorage.getItem("info"))
   }
@@ -39,7 +39,7 @@ function openModal(modalType) {
     modalContent.innerHTML = registerModal()
   }
 }
-function closeModal () {
+function closeModal() {
   let modal = document.getElementById("myModal");
   modal.style.display = "none";
 }
@@ -64,7 +64,7 @@ function registerModal() {
   `;
 }
 
-function login (email, password) {
+function login(email, password) {
   let loginJson = {
     email: email.value,
     password: password.value
@@ -77,22 +77,22 @@ function login (email, password) {
     },
     body: JSON.stringify(loginJson),
   })
-  .then((response) => {
-    return response.json();
-  })
-  .then((response) => {
-    if (response.message) {
-      let modalMsg = document.getElementById("modalMsg");
-      modalMsg.innerText = response.message;
-      setTimeout(() => { modalMsg.innerText = ""; }, 3000);
-    } else {
-      localStorage.setItem("info", JSON.stringify(response))
-      closeModal()
-      updateNavbar()
-    }
-  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.message) {
+        let modalMsg = document.getElementById("modalMsg");
+        modalMsg.innerText = response.message;
+        setTimeout(() => { modalMsg.innerText = ""; }, 3000);
+      } else {
+        localStorage.setItem("info", JSON.stringify(response))
+        closeModal()
+        updateNavbar()
+      }
+    })
 }
-function register (username, email, password, confirm_password) {
+function register(username, email, password, confirm_password) {
   if (password.value !== confirm_password.value) {
     let modalMsg = document.getElementById("modalMsg");
     modalMsg.innerText = "Passwords didn't match";
@@ -113,19 +113,19 @@ function register (username, email, password, confirm_password) {
     },
     body: JSON.stringify(registerJson),
   })
-  .then((response) => {
-    return response.json();
-  })
-  .then((response) => {
-    if (response.message) {
-      let modalMsg = document.getElementById("modalMsg");
-      modalMsg.innerText = response.message;
-      setTimeout(() => { modalMsg.innerText = ""; }, 3000);
-    } else {
-      localStorage.setItem("info", JSON.stringify(response))
-      closeModal()
-      updateNavbar()
-    }
-  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.message) {
+        let modalMsg = document.getElementById("modalMsg");
+        modalMsg.innerText = response.message;
+        setTimeout(() => { modalMsg.innerText = ""; }, 3000);
+      } else {
+        localStorage.setItem("info", JSON.stringify(response))
+        closeModal()
+        updateNavbar()
+      }
+    })
 }
 updateNavbar()

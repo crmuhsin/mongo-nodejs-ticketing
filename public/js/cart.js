@@ -4,6 +4,8 @@ if (query.split('=')[0] === "bookingId") {
   bookingId = query.split('=')[1];
 }
 var stationList;
+var currentBooking;
+var currentTrip;
 function getStations() {
   fetch("/station")
     .then((response) => {
@@ -26,9 +28,10 @@ function getBooking(bookingId) {
       return response.json();
     })
     .then((response) => {
+      currentBooking = response[0];
       let departure_date = document.getElementById("departure_date");
-      departure_date.innerText = response[0].date;
-      getCurrentTrip(response[0].trip_id, response[0].seat_list);
+      departure_date.innerText = currentBooking.date;
+      getCurrentTrip(currentBooking.trip_id, currentBooking.seat_list);
     });
 }
 function getCurrentTrip(tripId, seatList) {
@@ -37,13 +40,16 @@ function getCurrentTrip(tripId, seatList) {
       return response.json();
     })
     .then((response) => {
+      currentTrip = response[0];
+      currentTrip.fromStation = getStationById(currentTrip.from_station_id);
+      currentTrip.toStation = getStationById(currentTrip.to_station_id);
       let coach_no = document.getElementById("coach_no");
-      coach_no.innerText = response[0].coach_no;
+      coach_no.innerText = currentTrip.coach_no;
       let coach_type = document.getElementById("coach_type");
-      coach_type.innerText = response[0].coach_type;
+      coach_type.innerText = currentTrip.coach_type;
       let deperture_timeEl = document.getElementById("departure_time");
-      deperture_timeEl.innerText = response[0].deperture_time;
-            
+      deperture_timeEl.innerText = currentTrip.deperture_time;
+
       let cartTable = document.getElementById("cartTable");
       cartTable.innerHTML = `<thead><tr>
         <th>#</th>
@@ -56,9 +62,9 @@ function getCurrentTrip(tripId, seatList) {
         cartTable.innerHTML += `<tbody><tr>
           <td>${index + 1}</td>
           <td>${seat}</td>
-          <td>${getStationById(response[0].from_station_id)} To ${getStationById(response[0].to_station_id)}</td>
-          <td>${response[0].coach_type}</td>
-          <td>${response[0].fare}</td>
+          <td>${currentTrip.fromStation} To ${currentTrip.fromStation}</td>
+          <td>${currentTrip.coach_type}</td>
+          <td>${currentTrip.fare}</td>
         </tr></tbody>`
       });
       cartTable.innerHTML += `<tbody class="table-row"><tr>
@@ -66,27 +72,28 @@ function getCurrentTrip(tripId, seatList) {
         <td></td>
         <td></td>
         <td>Total</td>
-        <td>${seatList.length * response[0].fare}</td>
+        <td>${seatList.length * currentTrip.fare}</td>
       </tr></tbody>`
 
     });
 }
 function createTicket() {
+  let ticketParam = { to: userInfo.email, trip: currentTrip, booking: currentBooking };
   fetch("/create-ticket", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({to: "crmuhsin@gmail.com"}),
+    body: JSON.stringify(ticketParam),
   })
     .then((response) => {
       return response.json();
     })
     .then((response) => {
-      let a= document.createElement('a');
-      a.target= '_blank';
-      a.href= `output/${response.fileName}.pdf`;
+      let a = document.createElement('a');
+      a.target = '_blank';
+      a.href = `output/${response.fileName}.pdf`;
       a.click();
     });
 }

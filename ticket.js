@@ -1,40 +1,12 @@
 
 const PDFDocument = require("pdfkit");
-const ticket = {
-  shipping: {
-    name: "John Doe",
-    address: "1234 Main Street",
-    city: "San Francisco",
-    state: "CA",
-    country: "US",
-    postal_code: 94111
-  },
-  items: [
-    {
-      item: "TC 100",
-      description: "Toner Cartridge",
-      quantity: 2,
-      amount: 6000
-    },
-    {
-      item: "USB_EXT",
-      description: "USB Cable Extender",
-      quantity: 1,
-      amount: 2000
-    }
-  ],
-  subtotal: 8000,
-  paid: 0,
-  ticket_nr: 1234
-};
-
-function createTicket(writeStream) {
+function createTicket(writeStream, trip, booking) {
   let doc = new PDFDocument({ size: "A4", margin: 50 });
   doc.pipe(writeStream);
 
   generateHeader(doc);
-  generateCustomerInformation(doc, ticket);
-  generateTicketTable(doc, ticket);
+  generateCustomerInformation(doc, trip, booking);
+  generateTicketTable(doc, trip, booking);
   generateFooter(doc);
 
   doc.end();
@@ -44,123 +16,74 @@ function generateHeader(doc) {
   doc
     .fillColor("#444444")
     .fontSize(20)
-    .text("ACME Inc.", 110, 57)
+    .text("Exclusive Travels", 50, 45)
     .fontSize(10)
-    .text("ACME Inc.", 200, 50, { align: "right" })
-    .text("123 Main Street", 200, 65, { align: "right" })
-    .text("New York, NY, 10025", 200, 80, { align: "right" })
+    .text("Bohoddar Hut", 200, 45, { align: "right" })
+    .text("Chittagong, BD", 200, 65, { align: "right" })
     .moveDown();
 }
 
-function generateCustomerInformation(doc, ticket) {
+function generateCustomerInformation(doc, trip, booking) {
   doc
     .fillColor("#444444")
     .fontSize(20)
-    .text("Ticket", 50, 160);
+    .text("Ticket Information", 50, 160);
 
   generateHr(doc, 185);
 
   const customerInformationTop = 200;
-
   doc
     .fontSize(10)
-    .text("Ticket Number:", 50, customerInformationTop)
     .font("Helvetica-Bold")
-    .text(ticket.ticket_nr, 150, customerInformationTop)
+    .text("Ticket Number:", 50, customerInformationTop)
     .font("Helvetica")
+    .text(booking._id.slice(0, 4), 150, customerInformationTop)
+    .font("Helvetica-Bold")
     .text("Ticket Date:", 50, customerInformationTop + 15)
-    .text(formatDate(new Date()), 150, customerInformationTop + 15)
-    .text("Balance Due:", 50, customerInformationTop + 30)
-    .text(
-      formatCurrency(ticket.subtotal - ticket.paid),
-      150,
-      customerInformationTop + 30
-    )
+    .font("Helvetica")
+    .text(formatDate(new Date(booking.date)), 150, customerInformationTop + 15)
+    .font("Helvetica-Bold")
+    .text("Departure Time:", 50, customerInformationTop + 30)
+    .font("Helvetica")
+    .text(trip.deperture_time, 150, customerInformationTop + 30)
 
     .font("Helvetica-Bold")
-    .text(ticket.shipping.name, 300, customerInformationTop)
+    .text("Bus No:", 300, customerInformationTop)
     .font("Helvetica")
-    .text(ticket.shipping.address, 300, customerInformationTop + 15)
-    .text(
-      ticket.shipping.city +
-        ", " +
-        ticket.shipping.state +
-        ", " +
-        ticket.shipping.country,
-      300,
-      customerInformationTop + 30
-    )
+    .text(trip.coach_no, 400, customerInformationTop)
+    .font("Helvetica-Bold")
+    .text("Type:", 300, customerInformationTop + 15)
+    .font("Helvetica")
+    .text(trip.coach_type, 400, customerInformationTop + 15)
     .moveDown();
 
   generateHr(doc, 252);
 }
 
-function generateTicketTable(doc, ticket) {
+function generateTicketTable(doc, trip, booking) {
   let i;
   const ticketTableTop = 330;
 
   doc.font("Helvetica-Bold");
-  generateTableRow(
-    doc,
-    ticketTableTop,
-    "Item",
-    "Description",
-    "Unit Cost",
-    "Quantity",
-    "Line Total"
-  );
+  generateTableRow(doc, ticketTableTop, "#", "Seat", "Route", "Type", "Fare");
   generateHr(doc, ticketTableTop + 20);
   doc.font("Helvetica");
-
-  for (i = 0; i < ticket.items.length; i++) {
-    const item = ticket.items[i];
+  for (i = 0; i < booking.seat_list.length; i++) {
+    const seat = booking.seat_list[i];
     const position = ticketTableTop + (i + 1) * 30;
-    generateTableRow(
-      doc,
-      position,
-      item.item,
-      item.description,
-      formatCurrency(item.amount / item.quantity),
-      item.quantity,
-      formatCurrency(item.amount)
-    );
-
+    generateTableRow(doc, position, i + 1, seat, `${trip.fromStation} To ${trip.toStation}`, trip.coach_type, formatCurrency(trip.fare));
     generateHr(doc, position + 20);
   }
 
   const subtotalPosition = ticketTableTop + (i + 1) * 30;
-  generateTableRow(
-    doc,
-    subtotalPosition,
-    "",
-    "",
-    "Subtotal",
-    "",
-    formatCurrency(ticket.subtotal)
-  );
+  generateTableRow( doc, subtotalPosition, "", "", "Subtotal", "", formatCurrency(trip.fare * booking.seat_list.length));
 
   const paidToDatePosition = subtotalPosition + 20;
-  generateTableRow(
-    doc,
-    paidToDatePosition,
-    "",
-    "",
-    "Paid To Date",
-    "",
-    formatCurrency(ticket.paid)
-  );
+  generateTableRow( doc, paidToDatePosition, "", "", "Due", "", formatCurrency(0));
 
   const duePosition = paidToDatePosition + 25;
   doc.font("Helvetica-Bold");
-  generateTableRow(
-    doc,
-    duePosition,
-    "",
-    "",
-    "Balance Due",
-    "",
-    formatCurrency(ticket.subtotal - ticket.paid)
-  );
+  generateTableRow( doc, duePosition, "", "", "Total", "", formatCurrency(trip.fare * booking.seat_list.length));
   doc.font("Helvetica");
 }
 
@@ -168,29 +91,21 @@ function generateFooter(doc) {
   doc
     .fontSize(10)
     .text(
-      "Payment is due within 15 days. Thank you for your business.",
+      "Payment has completed. Thank you for being with us.",
       50,
       780,
       { align: "center", width: 500 }
     );
 }
 
-function generateTableRow(
-  doc,
-  y,
-  item,
-  description,
-  unitCost,
-  quantity,
-  lineTotal
-) {
+function generateTableRow(doc, y, no, seat, route, type, fare) {
   doc
     .fontSize(10)
-    .text(item, 50, y)
-    .text(description, 150, y)
-    .text(unitCost, 280, y, { width: 90, align: "right" })
-    .text(quantity, 370, y, { width: 90, align: "right" })
-    .text(lineTotal, 0, y, { align: "right" });
+    .text(no, 50, y)
+    .text(seat, 150, y)
+    .text(route, 230, y, { width: 140, align: "left" })
+    .text(type, 370, y, { width: 40, align: "right" })
+    .text(fare, 0, y, { align: "right" });
 }
 
 function generateHr(doc, y) {
@@ -202,8 +117,8 @@ function generateHr(doc, y) {
     .stroke();
 }
 
-function formatCurrency(cents) {
-  return "$" + (cents / 100).toFixed(2);
+function formatCurrency(taka) {
+  return "BDT " + (parseInt(taka)).toFixed(2);
 }
 
 function formatDate(date) {

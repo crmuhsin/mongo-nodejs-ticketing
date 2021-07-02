@@ -49,7 +49,7 @@ module.exports = function (zapp, mongoose) {
     let fileName = Helper.hashPassword("abc").slice(5, 15);
     let filePath = `public/output/${fileName}.pdf`;
     let writeStream = fs.createWriteStream(filePath);
-    pdf.createTicket(writeStream);
+    pdf.createTicket(writeStream, req.body.trip, req.body.booking);
 
     let mailParams = { to: req.body.to };
     writeStream.on('finish', function () {

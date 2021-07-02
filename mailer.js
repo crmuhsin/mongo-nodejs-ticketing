@@ -15,29 +15,29 @@ const transporter = nodemailer.createTransport({
 });
 
 let subject = "Exclusive Travels Ticket";
-let text = `Dear Valued Cardmember,
+let text = `Dear Valued Customer,
 
 
-Thank you for using LankaBangla VISA Credit Card.
+Thank you for booking and completing payment.
 
-Enclosed, please find your last month Credit Card account statement.
-The file is password protected. Please use the last four (4) digit of your credit card number (without any space or special character) as password to open the enclosed file.
+Attatche, please find your ticket.
+The file has all relevant booking information.
 
-If you have any query, please call 16325 or 09611016325 from overseas or email to myrequest@lankabangla.com
+If you have any query, please call or email to myrequest@exclusivetravels.com
 
-For more information of our products and services, please visit our website: www.lankabangla.com
+For more information, please visit our website: www.exclusivetravels.com
 
 Stay Safe!
 
 Best regards,
-LankaBangla Cards Team
+Exclusive Travels
 
 This is an auto-generated e-mail and please do not reply to this.`;
 
 module.exports = {
   sendMail(params, filePath) {
     const mailOptions = {
-      from: myEmail,
+      from: "no-reply@exclusivetravels.com",
       to: params.to,
       subject,
       text,

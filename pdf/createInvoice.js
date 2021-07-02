@@ -1,8 +1,8 @@
-const fs = require("fs");
 const PDFDocument = require("pdfkit");
 
-function createInvoice(invoice, path) {
+function createInvoice(invoice, writeStream) {
   let doc = new PDFDocument({ size: "A4", margin: 50 });
+  doc.pipe(writeStream);
 
   generateHeader(doc);
   generateCustomerInformation(doc, invoice);
@@ -10,7 +10,6 @@ function createInvoice(invoice, path) {
   generateFooter(doc);
 
   doc.end();
-  doc.pipe(fs.createWriteStream(path));
 }
 
 function generateHeader(doc) {

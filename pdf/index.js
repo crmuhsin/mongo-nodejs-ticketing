@@ -29,7 +29,7 @@ const invoice = {
 };
 
 module.exports = { 
-    createTicket(fileName) {
-        createInvoice(invoice, `public/output/${fileName}.pdf`);
+    createTicket(writeStream) {
+        createInvoice(invoice, writeStream);
     }
 }

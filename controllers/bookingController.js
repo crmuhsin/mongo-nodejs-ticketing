@@ -1,5 +1,6 @@
 const pdf = require("../pdf");
 const Helper = require("./Helper");
+const fs = require("fs");
 
 module.exports = function (zapp, mongoose) {
   //create  a schema - this is like a blueprint
@@ -45,8 +46,13 @@ module.exports = function (zapp, mongoose) {
   zapp.get("/create-ticket", function (req, res) {
     // get data from the view and add it to mongodb
     let fileName = Helper.hashPassword("abc").slice(5, 15);
-    pdf.createTicket(fileName);
-    res.send({fileName});
+    let writeStream = fs.createWriteStream(`public/output/${fileName}.pdf`);
+    pdf.createTicket(writeStream);
+    
+    writeStream.on('finish', function () {
+      // do stuff with the PDF file
+      res.send({fileName});
+    });
   });
 
   // //delete

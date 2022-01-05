@@ -137,6 +137,10 @@ function getTrip(tripId) {
       to_station_idEl.value = response[0].to_station_id;
       let deperture_timeEl = document.getElementById("deperture_time");
       deperture_timeEl.value = response[0].deperture_time;
+      let coach_noEl = document.getElementById("coach_no");
+      coach_noEl.value = response[0].coach_no;
+      let coach_typeEl = document.getElementById("coach_type");
+      coach_typeEl.value = response[0].coach_type;
       let fareEl = document.getElementById("fare");
       fareEl.value = response[0].fare;
     });

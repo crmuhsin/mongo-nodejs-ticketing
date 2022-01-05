@@ -1,8 +1,11 @@
 var userInfo = "";
 function updateNavbar() {
   let nav = document.getElementById("navList");
-  if (localStorage.getItem("info")) {
-    userInfo = JSON.parse(localStorage.getItem("info"))
+  console.log(localStorage.getItem("info").length);
+  if (localStorage.getItem("info").length) {
+    userInfo = JSON.parse(localStorage.getItem("info"));
+  } else {
+    userInfo = "";
   }
   if (userInfo) {
     nav.innerHTML = "";
@@ -18,8 +21,8 @@ function updateNavbar() {
   }
 }
 function logout() {
-  localStorage.setItem("info", "")
-  updateNavbar()
+  localStorage.setItem("info", "");
+  updateNavbar();
 }
 function openModal(modalType) {
   let modal = document.getElementById("myModal");
@@ -30,13 +33,13 @@ function openModal(modalType) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  }
-  if (modalType === 'Login') {
+  };
+  if (modalType === "Login") {
     modalHead.innerText = "Login";
     modalContent.innerHTML = loginModal();
   } else {
     modalHead.innerText = "Register";
-    modalContent.innerHTML = registerModal()
+    modalContent.innerHTML = registerModal();
   }
 }
 function closeModal() {
@@ -67,8 +70,8 @@ function registerModal() {
 function login(email, password) {
   let loginJson = {
     email: email.value,
-    password: password.value
-  }
+    password: password.value,
+  };
   fetch("/login", {
     method: "POST",
     headers: {
@@ -84,27 +87,31 @@ function login(email, password) {
       if (response.message) {
         let modalMsg = document.getElementById("modalMsg");
         modalMsg.innerText = response.message;
-        setTimeout(() => { modalMsg.innerText = ""; }, 3000);
+        setTimeout(() => {
+          modalMsg.innerText = "";
+        }, 3000);
       } else {
-        localStorage.setItem("info", JSON.stringify(response))
-        closeModal()
-        updateNavbar()
+        localStorage.setItem("info", JSON.stringify(response));
+        closeModal();
+        updateNavbar();
       }
-    })
+    });
 }
 function register(username, email, password, confirm_password) {
   if (password.value !== confirm_password.value) {
     let modalMsg = document.getElementById("modalMsg");
     modalMsg.innerText = "Passwords didn't match";
-    setTimeout(() => { modalMsg.innerText = ""; }, 3000);
+    setTimeout(() => {
+      modalMsg.innerText = "";
+    }, 3000);
     return;
   }
   let registerJson = {
     username: username.value,
     email: email.value,
     password: password.value,
-    user_type: "user"
-  }
+    user_type: "user",
+  };
   fetch("/register-user", {
     method: "POST",
     headers: {
@@ -120,12 +127,15 @@ function register(username, email, password, confirm_password) {
       if (response.message) {
         let modalMsg = document.getElementById("modalMsg");
         modalMsg.innerText = response.message;
-        setTimeout(() => { modalMsg.innerText = ""; }, 3000);
+        setTimeout(() => {
+          modalMsg.innerText = "";
+        }, 3000);
       } else {
-        localStorage.setItem("info", JSON.stringify(response))
-        closeModal()
-        updateNavbar()
+        // localStorage.setItem("info", JSON.stringify(response));
+        // closeModal();
+        // updateNavbar();
+        openModal("Login");
       }
-    })
+    });
 }
-updateNavbar()
+updateNavbar();
